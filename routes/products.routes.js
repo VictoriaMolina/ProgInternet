@@ -3,7 +3,8 @@ const router = express.Router();
 
 const {
     newProduct,
-    productList
+    productList,
+    productInfo
 } = require ('../controllers/product.controller');
 
 /**
@@ -14,6 +15,11 @@ router.post('/create', newProduct);
 /**
  * Route to get all product stored in database
  */
-router.post('/list', productList);
+router.get('/list', productList);
+
+/**
+ * Route to get all product stored in database
+ */
+router.get('/info', productInfo);
 
 module.exports = router;

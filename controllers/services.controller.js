@@ -97,10 +97,51 @@ async function serviceInfo(req, res){
     
 };
 
+async function serviceUpdate(req, res){
+    const updateId = req.body.id;
+
+        try{
+            const newService = await new Services.updateOne({
+                _id: updateId,
+                name: "Extraccion de muelas"
+            }, {
+                $set: {
+                    cost: 550,
+                    requiredTime: 4
+                }
+            });
+
+        }catch(err){
+            console.log("ERROR UPDATING")
+        }
+            
+
+            
+};
+
+async function serviceDelete(req, res){
+    const serviceId = req.body.id;
+
+    if(serviceId) {
+        try{
+            const results = await Services.deleteOne({
+                _id: serviceId
+            });
+        }catch(err){
+            res.status(500).send("ERROR DELETING");
+        }
+
+    } else {
+        res.status(402.).send("BAD PARAMETERS")
+    }
+    
+};
 
 
 module.exports = {
     newService,
     servicesList,
-    serviceInfo
+    serviceInfo, 
+    serviceUpdate,
+    serviceDelete
 };

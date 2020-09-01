@@ -3,7 +3,8 @@ const { route } = require('.');
 
 const {
      newAppointment, 
-     appointmentList 
+     appointmentList,
+     appointmentInfo
 } = require('../controllers/appointment.controller');
 
 const router = express.Router();
@@ -16,6 +17,11 @@ router.post('/new', newAppointment);
 /**
  * Route that shows you the appointments.
  */
-router.post('/list', appointmentList);
+router.get('/list', appointmentList);
+
+/**
+ * Route that shows you the appointments.
+ */
+router.get('/info', appointmentInfo);
 
 module.exports = router;
