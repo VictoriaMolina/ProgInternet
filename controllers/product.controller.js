@@ -96,8 +96,69 @@ async function productInfo(req, res){
     
 };
 
+/**
+ * Function that updates the information of the products.
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function productUpdate(req, res){
+    const updateId = req.body.id;
+
+        try{
+
+            if(updateId){
+                await Products.updateOne({
+                    _id: updateId
+                }, {
+
+                    $set: {
+                        cost: 2700,
+                    }
+                });
+
+                res.status(200).send("SUCCESS")
+            } else {
+                res.status(402).send("BAD PARAMETERS")
+                };
+
+        }catch(err){
+            res.status(500).send("ERROR")
+            console.log(err);
+        }       
+};
+
+/**
+ * Function to delete products.
+ * @param {*} req 
+ * @param {*} res 
+ */
+async function productDelete(req, res){
+    const productId = req.body.id;
+
+    if(productId) {
+        try{
+            const results = await Products.deleteOne();
+
+            if(results) {
+                res.json({'data': results});
+            } else {
+                res.status(500).send("ERROR STORING NEW SERVICES");
+            }
+
+        }catch(err){
+            res.status(500).send("ERROR DELETING");
+        }
+
+    } else {
+        res.status(402.).send("BAD PARAMETERS")
+    }
+    
+};
+
 module.exports = {
     newProduct,
     productList,
-    productInfo
+    productInfo,
+    productUpdate,
+    productDelete
 }

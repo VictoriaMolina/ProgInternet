@@ -101,22 +101,27 @@ async function serviceUpdate(req, res){
     const updateId = req.body.id;
 
         try{
-            const newService = await new Services.updateOne({
-                _id: updateId,
-                name: "Extraccion de muelas"
-            }, {
-                $set: {
-                    cost: 550,
-                    requiredTime: 4
-                }
-            });
+
+            if(updateId){
+                await Services.updateOne({
+                    _id: updateId
+                }, {
+
+                    $set: {
+                        cost: 550,
+                        requiredTime: 4
+                    }
+                });
+
+                res.status(200).send("SUCCESS")
+            } else {
+                res.status(402).send("BAD PARAMETERS")
+                };
 
         }catch(err){
-            console.log("ERROR UPDATING")
-        }
-            
-
-            
+            res.status(500).send("ERROR")
+            console.log(err);
+        }       
 };
 
 async function serviceDelete(req, res){
@@ -124,9 +129,14 @@ async function serviceDelete(req, res){
 
     if(serviceId) {
         try{
-            const results = await Services.deleteOne({
-                _id: serviceId
-            });
+            const results = await Services.deleteOne();
+
+            if(results) {
+                res.json({'data': results});
+            } else {
+                res.status(500).send("ERROR STORING NEW SERVICES");
+            }
+
         }catch(err){
             res.status(500).send("ERROR DELETING");
         }

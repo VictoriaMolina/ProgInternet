@@ -4,7 +4,9 @@ const { route } = require('.');
 const {
      newAppointment, 
      appointmentList,
-     appointmentInfo
+     appointmentInfo,
+     appointmentUpdate,
+     appointmentDelete
 } = require('../controllers/appointment.controller');
 
 const router = express.Router();
@@ -23,5 +25,15 @@ router.get('/list', appointmentList);
  * Route that shows you the appointments.
  */
 router.get('/info', appointmentInfo);
+
+/**
+ * Route that shows you the appointments.
+ */
+router.post('/update', appointmentUpdate);
+
+/**
+ * Route that shows you the appointments.
+ */
+router.post('/delete', appointmentDelete);
 
 module.exports = router;

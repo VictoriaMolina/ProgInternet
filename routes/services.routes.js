@@ -23,17 +23,17 @@ router.post('/new', newService);
 router.get('/list', servicesList);
 
 /**
- * Route that shows you the appointments.
+ * Route that shows you the info of the appointment.
  */
 router.get('/info', serviceInfo);
 
 /**
- * Route that shows you the appointments.
+ * Route that update the info.
  */
 router.post('/update', serviceUpdate);
 
 /**
- * Route that shows you the appointments.
+ * Route that delete the info.
  */
 router.post('/delete', serviceDelete);
 

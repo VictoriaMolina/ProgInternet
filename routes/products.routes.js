@@ -4,7 +4,9 @@ const router = express.Router();
 const {
     newProduct,
     productList,
-    productInfo
+    productInfo,
+    productUpdate,
+    productDelete
 } = require ('../controllers/product.controller');
 
 /**
@@ -22,4 +24,13 @@ router.get('/list', productList);
  */
 router.get('/info', productInfo);
 
+/**
+ * Route to get all product stored in database
+ */
+router.post('/update', productUpdate);
+
+/**
+ * Route to get all product stored in database
+ */
+router.post('/delete', productDelete);
 module.exports = router;
